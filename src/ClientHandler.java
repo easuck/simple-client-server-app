@@ -21,7 +21,7 @@ public class ClientHandler implements Runnable{
             PrintWriter printWriter = new PrintWriter(System.out);
             while(scanner.hasNextLine()){
                 printWriter.println(scanner.nextLine());
-                System.out.flush();
+                printWriter.flush();
             }
         }
         catch (Exception e){

@@ -11,6 +11,7 @@ public class Client {
         while (scanner.hasNextLine()){
             String clientMessage = scanner.nextLine();
             printWriter.println(clientMessage);
+            printWriter.flush();
         }
     }
 }
