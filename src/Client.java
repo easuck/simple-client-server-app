@@ -9,7 +9,6 @@ public class Client {
 
     public static List<String> chatHistory = new ArrayList<>();
     private Socket socket;
-    private ClientHandler clientHandler;
     private Scanner scanner;
     private PrintWriter printWriter;
     private String username;
