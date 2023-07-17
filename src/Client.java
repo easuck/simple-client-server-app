@@ -1,11 +1,15 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Client {
 
+    public static List<String> chatHistory = new ArrayList<>();
     private Socket socket;
+    private ClientHandler clientHandler;
     private Scanner scanner;
     private PrintWriter printWriter;
     private String username;
@@ -30,8 +34,17 @@ public class Client {
             Scanner scannerClientMessages = new Scanner(System.in);
             while (socket.isConnected()){
                 String message = scannerClientMessages.nextLine();
-                printWriter.println(username + ": " + message);
-                printWriter.flush();
+                if (message.equals("/history")){
+                    for (String m : chatHistory){
+                        System.out.println(m);
+                    }
+                }
+                else{
+                    chatHistory.add(username + ": " + message);
+                    printWriter.println(username + ": " + message);
+                    printWriter.flush();
+                }
+
             }
         }
         catch(Exception e){
@@ -47,6 +60,7 @@ public class Client {
                 while(socket.isConnected()){
                     try{
                         messageFromGroupChat = scanner.nextLine();
+                        chatHistory.add(messageFromGroupChat);
                         System.out.println(messageFromGroupChat);
                     }
                     catch(Exception e){
